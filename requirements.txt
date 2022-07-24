@@ -2,4 +2,7 @@ numpy
 pandas
 plotly
 geopy
+kaleido
+statsmodels
+
 # seaborn
