@@ -124,7 +124,7 @@ def create_histogramms_boxplots(df, exclude_cols=None):
     return fig
 
 
-def visualize_accomodations_on_map(df, fig_name=None, viz_dir=None):
+def visualize_accomodations_on_map(df, fig_name=None, save_output=True, viz_dir=None):
     """Returns a folium.Map to visualise the listings from hosts and superhosts."""
     m = folium.Map(
         location=[df["latitude"].median(), df["longitude"].median()], zoom_start=12
@@ -144,8 +144,9 @@ def visualize_accomodations_on_map(df, fig_name=None, viz_dir=None):
             tooltip=is_sh,
         ).add_to(m)
 
-    fig_name = fig_name if fig_name else "box"
-    m.save(os.path.join(viz_dir, f"{fig_name}.html"))
+    if save_output:
+        fig_name = fig_name if fig_name else "box"
+        m.save(os.path.join(viz_dir, f"{fig_name}.html"))
 
     return m
 
@@ -168,6 +169,7 @@ def create_bar_chart(
     fig_name=None,
     legend_yanchor=None,
     legend_xanchor=None,
+    save_output=True,
     viz_dir=None
 ):
     """Returns a Plotly bar chart for given configs."""
@@ -185,9 +187,11 @@ def create_bar_chart(
     update_fig_layout(
         fig, title, height, width, xaxis_title, yaxis_title, showlegend, legend_title, legend_yanchor=legend_yanchor, legend_xanchor=legend_xanchor
     )
-    fig_name = fig_name if fig_name else "bar"
-    fig.write_html(os.path.join(viz_dir, f"{fig_name}.html"))
-    fig.write_image(os.path.join(viz_dir, f"{fig_name}.png"), format="png", width=width, height=height, scale=10)
+
+    if save_output:
+        fig_name = fig_name if fig_name else "bar"
+        fig.write_html(os.path.join(viz_dir, f"{fig_name}.html"))
+        fig.write_image(os.path.join(viz_dir, f"{fig_name}.png"), format="png", width=width, height=height, scale=10)
 
     return fig
 
@@ -207,6 +211,7 @@ def create_box_plot(
     xaxis_title=None,
     yaxis_title=None,
     fig_name=None,
+    save_output=True,
     viz_dir=None
 ):
     """Returns a Plotly box plot for given configs."""
@@ -222,9 +227,10 @@ def create_box_plot(
         fig, title, height, width, xaxis_title, yaxis_title, showlegend, legend_title, legend_yanchor, legend_xanchor
     )
 
-    fig_name = fig_name if fig_name else "box"
-    fig.write_html(os.path.join(viz_dir, f"{fig_name}.html"))
-    fig.write_image(os.path.join(viz_dir, f"{fig_name}.png"), format="png", width=DEFAULT_FIG_WIDTH, height=DEFAULT_FIG_HEIGHT, scale=10)
+    if save_output:
+        fig_name = fig_name if fig_name else "box"
+        fig.write_html(os.path.join(viz_dir, f"{fig_name}.html"))
+        fig.write_image(os.path.join(viz_dir, f"{fig_name}.png"), format="png", width=DEFAULT_FIG_WIDTH, height=DEFAULT_FIG_HEIGHT, scale=10)
 
     return fig
 
@@ -239,6 +245,7 @@ def create_pie_chart(
     showlegend=True,
     legend_title=None,
     fig_name=None,
+    save_output=True,
     viz_dir=None
 ):
     """Returns a Plotly pie chart for given configs."""
@@ -259,9 +266,11 @@ def create_pie_chart(
         showlegend=showlegend,
         legend_title=legend_title,
     )
-    fig_name = fig_name if fig_name else "pie"
-    fig.write_html(os.path.join(viz_dir, f"{fig_name}.html"))
-    fig.write_image(os.path.join(viz_dir, f"{fig_name}.png"), format="png", width=DEFAULT_FIG_WIDTH, height=DEFAULT_FIG_HEIGHT, scale=10)
+
+    if save_output:
+        fig_name = fig_name if fig_name else "pie"
+        fig.write_html(os.path.join(viz_dir, f"{fig_name}.html"))
+        fig.write_image(os.path.join(viz_dir, f"{fig_name}.png"), format="png", width=DEFAULT_FIG_WIDTH, height=DEFAULT_FIG_HEIGHT, scale=10)
 
     return fig
 
