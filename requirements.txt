@@ -1,8 +1,7 @@
+folium
+geopy
+kaleido
 numpy
 pandas
 plotly
-geopy
-kaleido
 statsmodels
-
-# seaborn
