@@ -58,10 +58,11 @@ def run_ttest_independent(df1, df2, metric_col):
     """Performs an independent t-test and prints the significance of the test."""
     res = ttest_ind(df1[metric_col].dropna(), df2[metric_col].dropna())
     p_value = res.pvalue
+    print(f"Significance of Independent T-Test comparing Superhosts and regular hosts on {metric_col}:")
     if p_value < 0.001:
-        print(f"{metric_col}: p < 0.001")
+        print(f"p < 0.001")
     elif 0.001 <= p_value <= 0.01:
-        print(f"{metric_col}: {round(p_value), 3}")
+        print(f"p = {round(p_value, 3)}")
     else:
-        print(f"{metric_col}: {round(p_value), 2}")
+        print(f"p = {round(p_value, 2)}")
 
