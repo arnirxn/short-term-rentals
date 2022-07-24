@@ -1,0 +1,7 @@
+folium
+geopy
+kaleido
+numpy
+pandas
+plotly
+statsmodels
