@@ -1,4 +1,5 @@
 import ast
+from helpers.analyses import calculate_distance_to_amsterdam_centrum
 import pandas as pd
 import warnings
 
@@ -100,3 +101,16 @@ def clean_dataframe(df):
         axis=1,
         inplace=True,
     )
+
+
+def add_columns_to_df(df):
+    """Adds columns to a pandas.DataFrame relevant to the host analysis."""
+    df["description_length"] = df["description"].fillna("").apply(lambda x: len(x))
+    df["host_about_length"] = df["host_about"].fillna("").apply(lambda x: len(x))
+    df["neighborhood_overview_length"] = df["neighborhood_overview"].fillna("").apply(lambda x: len(x))
+    df["number_of_amenities"] = df["amenities"].apply(lambda x: len(x))
+    df["number_of_host_verifications"] = df["host_verifications"].apply(lambda x: len(x))
+    df["distance_to_centre_km"] = df.apply(
+        lambda x: calculate_distance_to_amsterdam_centrum(x["latitude"], x["longitude"]), axis=1)
+    df["host_type"] = df["host_is_superhost"].replace([True, False], ["Superhost", "Host"])
+    df["review_scores_rating_bin"] = df["review_scores_rating"].round(0).astype("Int64")
