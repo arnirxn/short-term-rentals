@@ -62,7 +62,7 @@ def update_fig_layout(
             yanchor="top",
             y=legend_yanchor,
             xanchor="center",
-            x=legend_xanchor
+            x=legend_xanchor,
         ),
     )
 
@@ -170,7 +170,7 @@ def create_bar_chart(
     legend_yanchor=None,
     legend_xanchor=None,
     save_output=True,
-    viz_dir=None
+    viz_dir=None,
 ):
     """Returns a Plotly bar chart for given configs."""
     fig = px.bar(
@@ -185,13 +185,28 @@ def create_bar_chart(
     )
 
     update_fig_layout(
-        fig, title, height, width, xaxis_title, yaxis_title, showlegend, legend_title, legend_yanchor=legend_yanchor, legend_xanchor=legend_xanchor
+        fig,
+        title,
+        height,
+        width,
+        xaxis_title,
+        yaxis_title,
+        showlegend,
+        legend_title,
+        legend_yanchor=legend_yanchor,
+        legend_xanchor=legend_xanchor,
     )
 
     if save_output:
         fig_name = fig_name if fig_name else "bar"
         fig.write_html(os.path.join(viz_dir, f"{fig_name}.html"))
-        fig.write_image(os.path.join(viz_dir, f"{fig_name}.png"), format="png", width=width, height=height, scale=10)
+        fig.write_image(
+            os.path.join(viz_dir, f"{fig_name}.png"),
+            format="png",
+            width=width,
+            height=height,
+            scale=10,
+        )
 
     return fig
 
@@ -212,7 +227,7 @@ def create_box_plot(
     yaxis_title=None,
     fig_name=None,
     save_output=True,
-    viz_dir=None
+    viz_dir=None,
 ):
     """Returns a Plotly box plot for given configs."""
     fig = px.box(
@@ -224,13 +239,28 @@ def create_box_plot(
     )
 
     update_fig_layout(
-        fig, title, height, width, xaxis_title, yaxis_title, showlegend, legend_title, legend_yanchor, legend_xanchor
+        fig,
+        title,
+        height,
+        width,
+        xaxis_title,
+        yaxis_title,
+        showlegend,
+        legend_title,
+        legend_yanchor,
+        legend_xanchor,
     )
 
     if save_output:
         fig_name = fig_name if fig_name else "box"
         fig.write_html(os.path.join(viz_dir, f"{fig_name}.html"))
-        fig.write_image(os.path.join(viz_dir, f"{fig_name}.png"), format="png", width=DEFAULT_FIG_WIDTH, height=DEFAULT_FIG_HEIGHT, scale=10)
+        fig.write_image(
+            os.path.join(viz_dir, f"{fig_name}.png"),
+            format="png",
+            width=DEFAULT_FIG_WIDTH,
+            height=DEFAULT_FIG_HEIGHT,
+            scale=10,
+        )
 
     return fig
 
@@ -246,7 +276,7 @@ def create_pie_chart(
     legend_title=None,
     fig_name=None,
     save_output=True,
-    viz_dir=None
+    viz_dir=None,
 ):
     """Returns a Plotly pie chart for given configs."""
     fig = px.pie(
@@ -270,9 +300,12 @@ def create_pie_chart(
     if save_output:
         fig_name = fig_name if fig_name else "pie"
         fig.write_html(os.path.join(viz_dir, f"{fig_name}.html"))
-        fig.write_image(os.path.join(viz_dir, f"{fig_name}.png"), format="png", width=DEFAULT_FIG_WIDTH, height=DEFAULT_FIG_HEIGHT, scale=10)
+        fig.write_image(
+            os.path.join(viz_dir, f"{fig_name}.png"),
+            format="png",
+            width=DEFAULT_FIG_WIDTH,
+            height=DEFAULT_FIG_HEIGHT,
+            scale=10,
+        )
 
     return fig
-
-
-
