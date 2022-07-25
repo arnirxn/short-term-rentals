@@ -65,4 +65,3 @@ def run_ttest_independent(df1, df2, metric_col):
         print(f"p = {round(p_value, 3)}")
     else:
         print(f"p = {round(p_value, 2)}")
-
